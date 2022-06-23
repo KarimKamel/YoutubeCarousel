@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    @font-face {
+      font-family: myFirstFont;
+      src: url(./fonts/zrnic\ rg.ttf);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    .slide-show {
+      border: 2px solid rgba(0, 0, 0, 0.192);
+      box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
+      width: 500px;
+      border-radius: 25px;
+      margin: auto;
+      background-color: rgb(126, 133, 139);
+    }
+    .slide-show-header {
+      text-align: center;
+      margin: 1rem;
+      font-family: myFirstFont;
+    }
+    .slide-show-header > img {
+      width: 50px;
+    }
+
+    .slide-container > img {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      display: none;
+      width: 100%;
+      height: 500px;
+      object-fit: contain;
+    }
+    .dots-container {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+    }
+    .dot {
+      border: 2px rgb(247, 243, 243) solid;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin-right: 0.25rem;
+      cursor: pointer;
+    }
+
+    .selected-dot {
+      background-color: rgba(255, 255, 255, 0.719);
+    }
+  </style>
+  <body>
+    <div class="slide-show">
+      <h1 class="slide-show-header">
+        My Favourite <img src="./images/ps-logo.png" alt="" srcset="" /> Games
+      </h1>
+      <div class="slide-container">
+        <img src="./images/metal-gear-solid.jpg" alt="" srcset="" />
+        <img src="./images/crash-bandicoot.jpg" alt="" srcset="" />
+        <img src="./images/resident-evil.jpg" alt="" srcset="" />
+        <img src="./images/silent-hill.jpg" alt="" srcset="" />
+      </div>
+      <div class="dots-container">
+        <div class="dot" onclick="showSlide(0)"></div>
+        <div class="dot" onclick="showSlide(1)"></div>
+        <div class="dot" onclick="showSlide(2)"></div>
+        <div class="dot" onclick="showSlide(3)"></div>
+      </div>
+    </div>
+    <script>
+      const slideArray = document.querySelectorAll(".slide-container > img");
+      const dotsArray = document.querySelectorAll(".dot");
+      let currentSlide = 0;
+      showSlide(0);
+      setInterval(showNextSlide, 3000);
+      function showSlide(slideNumber) {
+        for (let i = 0; i < slideArray.length; i++) {
+          slideArray[i].style.setProperty("display", "none");
+          dotsArray[i].classList.remove("selected-dot");
+        }
+        slideArray[slideNumber].style.setProperty("display", "block");
+        dotsArray[slideNumber].classList.add("selected-dot");
+        currentSlide = slideNumber;
+      }
+      function showNextSlide() {
+        console.log("show Next Slide called");
+        console.log(currentSlide);
+        if (currentSlide < slideArray.length - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+        } else {
+          showSlide(0);
+        }
+      }
+    </script>
+  </body>
+</html>
